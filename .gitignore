@@ -1,0 +1,42 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# 虚拟环境（按需保留一个，不存在的忽略）
+.venv/
+venv/
+rag-env/
+env/
+
+# 敏感配置
+.env
+
+# 向量库数据（不提交，本地生成）
+chroma_db/
+*.sqlite3
+
+# 上传文档与运行时数据
+data/uploads/
+data/processed/
+
+# 日志
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 系统
+Thumbs.db
+ehthumbs.db

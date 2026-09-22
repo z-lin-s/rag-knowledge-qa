@@ -1,0 +1,47 @@
+[project]
+name = "enhanced-rag-kb"
+version = "0.1.0"
+description = "增强型 RAG 私有知识库问答系统：混合检索 + 多分片策略 + 向量库多后端 + RAG 评测 + Agentic-RAG，CLI/FastAPI/Gradio 多入口。"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Learn-OpenClaw contributors" }]
+dependencies = [
+    # LLM / Embedding：原生 OpenAI 兼容 SDK
+    "openai>=1.40.0",
+    "python-dotenv>=1.0.0",
+    # 向量库：chromadb 原生 SDK（不用 langchain 封装）
+    "chromadb>=0.5.0",
+    # BM25 稀疏检索
+    "rank-bm25>=0.2.2",
+    # PDF 解析
+    "pymupdf>=1.24.0",
+    # 重试 / 配置 / 日志
+    "tenacity>=8.2.0",
+    "pydantic-settings>=2.0.0",
+    # CLI 框架
+    "click>=8.1.0",
+    # 后端 API
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.27.0",
+    # 本地演示 UI
+    "gradio>=4.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0", "httpx>=0.27.0"]
+# Milvus 向量库后端
+milvus = ["pymilvus>=2.4.0"]
+# PGVector 向量库后端（Postgres + pgvector 扩展需另装）
+pgvector = ["pgvector>=0.3.0", "psycopg2-binary>=2.9.0"]
+
+[project.scripts]
+# 命令行入口：rag-cli build / ask / serve / upload / drop
+rag-cli = "cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["rag"]
